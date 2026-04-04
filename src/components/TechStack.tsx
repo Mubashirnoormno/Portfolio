@@ -20,7 +20,7 @@ const textures = imageUrls.map((url) => textureLoader.load(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 20, 20);
 
-const spheres = [...Array(30)].map(() => ({
+const spheres = [...Array(18)].map(() => ({
   scale: [1, 1.1, 1.2, 1.3][Math.floor(Math.random() * 4)],
 }));
 
@@ -98,8 +98,6 @@ function SphereGeo({
       <BallCollider args={[scale]} />
       <mesh
         ref={meshRef}
-        castShadow
-        receiveShadow
         scale={scale}
         geometry={sphereGeometry}
         material={material}
@@ -172,8 +170,13 @@ const TechStack = () => {
     <div className="techstack">
       <h2>Tech Arena</h2>
       <Canvas
-        shadows
-        gl={{ alpha: true, antialias: false }}
+        gl={{ 
+          alpha: true, 
+          antialias: false, 
+          stencil: false, 
+          depth: true, 
+          powerPreference: "high-performance" 
+        }}
         camera={{ position: [0, 0, 25], fov: 45 }}
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}

@@ -137,27 +137,56 @@ const CreativeGallery = () => {
 
         <div className="masonry-grid" ref={galleryRef}>
           {galleryItems.map((item) => (
-            <div
-              className="gallery-item"
-              key={item.id}
-              data-cursor="pointer"
-              onClick={() => setSelectedItem(item)}
-            >
-              <div className="item-inner">
-                <img src={item.image} alt={item.title} />
-                
-                {/* Floating Skill Match Circle */}
-                <div className="card-skill-circle" data-full-name={item.title}>
-                  {getShortName(item.id)}
-                </div>
+            <div key={item.id} className="gallery-item-wrapper">
+              <a
+                href={item.driveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gallery-item"
+                data-cursor="pointer"
+                style={{ textDecoration: "none", display: "block" }}
+                onClick={(e) => {
+                  // Ensure this click is treated as a direct link open
+                  e.stopPropagation();
+                }}
+              >
+                <div className="item-inner">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    loading="lazy" 
+                    decoding="async"
+                  />
+                  
+                  {/* Floating Skill Match Circle */}
+                  <div className="card-skill-circle" data-full-name={item.title}>
+                    {getShortName(item.id)}
+                  </div>
 
-                <div className="item-overlay">
-                  <div className="overlay-content">
-                    <span className="item-category">{item.category}</span>
-                    <h3 className="item-title">{item.title}</h3>
+                  <div className="item-overlay">
+                    <div className="overlay-content">
+                      <span className="item-category">{item.category}</span>
+                      <h3 className="item-title" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                        {item.title} <MdOpenInNew style={{ fontSize: "1.2rem", color: "#5eead4" }} />
+                      </h3>
+                      <span className="click-hint">Click card to open work</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </a>
+              
+              {/* Optional Info Button for Modal */}
+              <button 
+                className="info-btn" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setSelectedItem(item);
+                }}
+                title="View Details"
+              >
+                i
+              </button>
             </div>
           ))}
         </div>

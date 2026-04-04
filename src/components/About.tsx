@@ -18,6 +18,19 @@ const About = () => {
           <span className="skill-tag">Multimedia Content Strategy</span>
           <span className="skill-tag">Professional Voiceovers</span>
         </div>
+        
+        {/* Dynamic Professional Call-to-Action */}
+        <div className="about-cta" style={{ marginTop: "40px" }}>
+          <a 
+            href="/Mubashir's Resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="resume-button"
+            data-cursor="pointer"
+          >
+            Download Full Resume (PDF)
+          </a>
+        </div>
       </div>
     </div>
   );

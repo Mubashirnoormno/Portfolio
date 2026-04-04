@@ -111,6 +111,7 @@ body {
   margin: auto;
   margin-top: 50px;
   margin-bottom: -100px;
+  z-index: 1; /* Keep physics behind main interaction sections */
 }
 
 .techstack h2 {
