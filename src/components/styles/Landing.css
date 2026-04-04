@@ -234,14 +234,14 @@
 }
 
 h2.landing-info-h2 {
-  color: #14b8a6;
-  font-size: 42px;
-  width: 120%;
+  color: var(--accentColor);
+  font-size: 38px;
+  width: 100%;
   margin: 0;
   font-family: "Geist", sans-serif;
   font-weight: 600;
   position: relative;
-  margin-left: -5px;
+  text-align: center;
 }
 
 .landing-h2-2 {
@@ -351,6 +351,10 @@ h2.landing-info-h2 {
     right: auto;
     left: 66%;
   }
+
+  h2.landing-info-h2 {
+    text-align: left;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -394,4 +398,11 @@ h2.landing-info-h2 {
   h2.landing-info-h2 {
     font-size: 75px;
   }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
 }

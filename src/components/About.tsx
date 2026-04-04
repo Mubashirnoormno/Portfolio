@@ -6,11 +6,18 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Results-driven software developer with 4+ years of hands-on experience building and
-          deploying full-stack web applications, digital systems, and real-time platforms.
-          Independently designed and delivered a complete Digital Stadium Entry & Ticket
-          Verification System. Experienced in e-commerce, UI/UX, and media production.
+          I am a results-driven full-stack developer and creative professional with over <strong>4 years of experience</strong> building scalable web applications, digital systems, and high-end multimedia content. 
+          I independently designed a complete <strong>Digital Stadium Entry System</strong> presented to the <strong>Pakistan Cricket Board (PCB)</strong>, and produced highly evocative voiceovers for a <strong>3M+ subscriber YouTube channel.</strong> 
+          I bring ideas to life through robust engineering and compelling storytelling, taking pride in taking complex projects from concept to deployment with highly measurable outcomes.
         </p>
+        <div className="about-skills">
+          <span className="skill-tag">Digital Systems Architecture</span>
+          <span className="skill-tag">High-Performance Web Apps</span>
+          <span className="skill-tag">E-Commerce Infrastructure</span>
+          <span className="skill-tag">Interactive UI/UX</span>
+          <span className="skill-tag">Multimedia Content Strategy</span>
+          <span className="skill-tag">Professional Voiceovers</span>
+        </div>
       </div>
     </div>
   );

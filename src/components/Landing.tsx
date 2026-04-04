@@ -1,7 +1,24 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState, useEffect } from "react";
 import "./styles/Landing.css";
 
+const ROLES = [
+  "Systems Architect",
+  "Full-Stack Engineer",
+  "Multimedia Producer",
+  "Reputation Manager",
+  "Voiceover Artist",
+  "Brand Strategist"
+];
+
 const Landing = ({ children }: PropsWithChildren) => {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, 2000); // changes every 2 seconds
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       <div className="landing-section" id="landingDiv">
@@ -14,15 +31,12 @@ const Landing = ({ children }: PropsWithChildren) => {
               <span>NOOR</span>
             </h1>
           </div>
-          <div className="landing-info">
-            <h3>A Full Stack</h3>
-            <h2 className="landing-info-h2">
-              <div className="landing-h2-1">Developer</div>
-              <div className="landing-h2-2">Systems</div>
-            </h2>
-            <h2>
-              <div className="landing-h2-info">Engineer</div>
-              <div className="landing-h2-info-1">Web Dev</div>
+          <div className="landing-info" style={{ minHeight: "100px" }}>
+            <h3>I am a</h3>
+            <h2 className="landing-info-h2" style={{ marginTop: "10px", paddingBottom: "10px" }}>
+              <div style={{ color: "var(--accentColor)", animation: "fadeInOut 2s infinite" }}>
+                {ROLES[roleIndex]}
+              </div>
             </h2>
           </div>
         </div>

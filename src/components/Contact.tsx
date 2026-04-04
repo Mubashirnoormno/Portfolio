@@ -38,10 +38,17 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Mubashir Noor</span>
+              Designed and Developed <br /> by 
+              <a 
+                href="mailto:mmubashir342@gmail.com" 
+                style={{ color: "inherit", textDecoration: "none", zIndex: 999, position: "relative" }}
+                data-cursor="disable"
+              >
+                <span style={{ fontWeight: 700 }}> Mubashir Noor</span>
+              </a>
             </h2>
             <h5>
-              <MdCopyright /> 2025
+              <MdCopyright /> 2022
             </h5>
           </div>
         </div>

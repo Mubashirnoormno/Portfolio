@@ -2,65 +2,72 @@ import "./styles/Career.css";
 
 const Career = () => {
   return (
-    <div className="career-section section-container">
+    <div className="career-section section-container" id="experience">
       <div className="career-container">
         <h2>
-          My career <span>&</span>
-          <br /> experience
+          Professional <span>Journey</span>
+          <br /> & Experience
         </h2>
+        
         <div className="career-info">
           <div className="career-timeline">
             <div className="career-dot"></div>
           </div>
+          
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Voiceover Artist</h4>
-                <h5>Towards Eternity</h5>
-              </div>
-              <h3>22-23</h3>
-            </div>
-            <p>
-              Delivered professional Urdu voiceovers for educational and motivational videos for a globally recognized 3M+ subscriber YouTube channel.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Web Developer</h4>
-                <h5>Aptech Peshawar</h5>
-              </div>
-              <h3>2022</h3>
-            </div>
-            <p>
-              Developing the institute's educational websites and delivering full-stack instruction to 20+ students covering PHP, JS, and React.
-            </p>
-          </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Freelance Developer</h4>
-                <h5>Independent</h5>
+                <h4>Lead Systems Architect</h4>
+                <h5>Independent Consultancy / PCB</h5>
               </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Developed full-stack e-commerce platforms using PHP, React, Node, and MongoDB. Delivered 10+ WordPress websites with SEO optimization.
+              Single-handedly engineered, designed, and launched a complete real-time Digital Stadium Entry & Ticket Verification System. Successfully presented the production-ready architecture directly to the Pakistan Cricket Board (PCB).
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Digital System Engineer</h4>
-                <h5>Pakistan Cricket Board (PCB)</h5>
+                <h4>Full-Stack Web Developer</h4>
+                <h5>Xpert IT Solutions</h5>
               </div>
-              <h3>2025</h3>
+              <h3>2022</h3>
             </div>
             <p>
-              Designed & deployed a complete Stadium Entry System. Built a fan portal for identity verification, an offline-capable Gate Scanner App, and a real-time Admin Attendance Dashboard.
+              Ranked 1st among 65 competing web platforms at Xpert IT Solutions for outstanding technical code quality and UI/UX design. Architected, developed, and deployed 5+ scalable, full-stack e-commerce platforms handling live transactions.
+            </p>
+          </div>
+          
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Professional Voiceover Artist</h4>
+                <h5>Towards Eternity</h5>
+              </div>
+              <h3>2021</h3>
+            </div>
+            <p>
+              Provided primary studio-grade voiceover talent for a rapidly scaling YouTube channel that successfully reached 3+ Million global subscribers. Produced and delivered highly evocative cinematic Urdu voiceovers.
+            </p>
+          </div>
+
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Lead Multimedia Producer</h4>
+                <h5>Premium Freelance Services (Upwork)</h5>
+              </div>
+              <h3>2019</h3>
+            </div>
+            <p>
+              Started my freelance journey by providing top-tier video editing and multimedia direction to international clients on Upwork. Successfully directed high-end promotional videos and professional marketing campaigns.
             </p>
           </div>
         </div>
+
+
       </div>
     </div>
   );

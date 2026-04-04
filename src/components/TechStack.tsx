@@ -2,14 +2,8 @@ import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
-import {
-  BallCollider,
-  Physics,
-  RigidBody,
-  CylinderCollider,
-  RapierRigidBody,
-} from "@react-three/rapier";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { BallCollider, Physics, RigidBody, RapierRigidBody } from "@react-three/rapier";
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
@@ -24,18 +18,20 @@ const imageUrls = [
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
+const sphereGeometry = new THREE.SphereGeometry(1, 20, 20);
 
 const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
+  scale: [1, 1.1, 1.2, 1.3][Math.floor(Math.random() * 4)],
 }));
 
-type SphereProps = {
+type TechStackProps = {
   vec?: THREE.Vector3;
   scale: number;
   r?: typeof THREE.MathUtils.randFloatSpread;
   material: THREE.MeshPhysicalMaterial;
   isActive: boolean;
+  isAttracting: boolean;
+  explosion: { x: number; y: number; time: number } | null;
 };
 
 function SphereGeo({
@@ -44,81 +40,86 @@ function SphereGeo({
   r = THREE.MathUtils.randFloatSpread,
   material,
   isActive,
-}: SphereProps) {
+  isAttracting,
+  explosion,
+}: TechStackProps) {
   const api = useRef<RapierRigidBody | null>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
 
-  useFrame((_state, delta) => {
-    if (!isActive) return;
+  useFrame((state, delta) => {
+    if (!isActive || !api.current) return;
     delta = Math.min(0.1, delta);
-    const impulse = vec
-      .copy(api.current!.translation())
-      .normalize()
-      .multiply(
-        new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
-        )
-      );
 
-    api.current?.applyImpulse(impulse, true);
+    const currentPos = api.current.translation();
+    const cursorVec = new THREE.Vector3(
+      (state.pointer.x * state.viewport.width) / 2,
+      (state.pointer.y * state.viewport.height) / 2,
+      0
+    );
+
+    // 1. Regular Mouse Push/Pull
+    const direction = vec.copy(currentPos).sub(cursorVec);
+    const distance = direction.length();
+    
+    if (distance < 10) {
+      const forceMultiplier = isAttracting ? -300 : 180; // Harder Pull (-) vs Fast Passive Push (+)
+      const impulse = direction
+        .normalize()
+        .multiplyScalar(forceMultiplier * delta * scale * (10 / (distance + 0.5)));
+      api.current.applyImpulse(impulse, true);
+    }
+
+    // 3. Fast Centering Force (Snap back into the arena)
+    const centeringForce = vec.copy(currentPos).multiplyScalar(-0.8 * delta);
+    api.current.applyImpulse(centeringForce, true);
+
+    // 2. Shockwave Explosion Logic (Extremely Fast PUSH)
+    if (explosion && Date.now() - explosion.time < 150) {
+      const explosionCenter = new THREE.Vector3(explosion.x, explosion.y, 0);
+      const expoDir = vec.copy(currentPos).sub(explosionCenter);
+      const expoDist = expoDir.length();
+      if (expoDist < 18) {
+        const boom = expoDir.normalize().multiplyScalar(1200 * scale * (1 / (expoDist + 0.5)));
+        api.current.applyImpulse(boom, true);
+      }
+    }
   });
 
   return (
     <RigidBody
-      linearDamping={0.75}
-      angularDamping={0.15}
-      friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
+      linearDamping={0.2}
+      angularDamping={0.2}
+      friction={0.1}
+      restitution={1}
+      position={[r(20), r(20), r(10)]}
       ref={api}
       colliders={false}
     >
       <BallCollider args={[scale]} />
-      <CylinderCollider
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, 0, 1.2 * scale]}
-        args={[0.15 * scale, 0.275 * scale]}
-      />
       <mesh
+        ref={meshRef}
         castShadow
         receiveShadow
         scale={scale}
         geometry={sphereGeometry}
         material={material}
-        rotation={[0.3, 1, 1]}
+        rotation={[r(Math.PI), r(Math.PI), r(Math.PI)]}
       />
     </RigidBody>
   );
 }
 
-type PointerProps = {
-  vec?: THREE.Vector3;
-  isActive: boolean;
-};
-
-function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
+function Pointer() {
   const ref = useRef<RapierRigidBody>(null);
-
   useFrame(({ pointer, viewport }) => {
-    if (!isActive) return;
-    const targetVec = vec.lerp(
-      new THREE.Vector3(
-        (pointer.x * viewport.width) / 2,
-        (pointer.y * viewport.height) / 2,
-        0
-      ),
-      0.2
-    );
-    ref.current?.setNextKinematicTranslation(targetVec);
+    ref.current?.setNextKinematicTranslation({
+      x: (pointer.x * viewport.width) / 2,
+      y: (pointer.y * viewport.height) / 2,
+      z: 0,
+    });
   });
-
   return (
-    <RigidBody
-      position={[100, 100, 100]}
-      type="kinematicPosition"
-      colliders={false}
-      ref={ref}
-    >
+    <RigidBody position={[100, 100, 100]} type="kinematicPosition" colliders={false} ref={ref}>
       <BallCollider args={[2]} />
     </RigidBody>
   );
@@ -126,31 +127,19 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isAttracting, setIsAttracting] = useState(false);
+  const [explosion, setExplosion] = useState<{ x: number; y: number; time: number } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
+      const threshold = document.getElementById("experience")?.getBoundingClientRect().top || 0;
       setIsActive(scrollY > threshold);
     };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
@@ -158,55 +147,65 @@ const TechStack = () => {
           map: texture,
           emissive: "#ffffff",
           emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
+          emissiveIntensity: 0.5,
+          metalness: 0.6,
+          roughness: 0.3,
+          clearcoat: 0.5,
         })
     );
   }, []);
 
+  const handlePointerDown = () => {
+    setIsAttracting(true);
+  };
+
+  const handlePointerUp = (e: any) => {
+    setIsAttracting(false);
+    // Trigger Shockwave
+    const x = (e.pointer.x * e.viewport.width) / 2;
+    const y = (e.pointer.y * e.viewport.height) / 2;
+    setExplosion({ x, y, time: Date.now() });
+    setTimeout(() => setExplosion(null), 200);
+  };
+
   return (
     <div className="techstack">
-      <h2> My Techstack</h2>
-
+      <h2>Tech Arena</h2>
       <Canvas
         shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+        gl={{ alpha: true, antialias: false }}
+        camera={{ position: [0, 0, 25], fov: 45 }}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
         className="tech-canvas"
       >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
+        <ambientLight intensity={1.5} />
+        <spotLight position={[20, 20, 25]} penumbra={1} angle={0.2} color="white" castShadow />
+        <directionalLight position={[-10, 10, 5]} intensity={1} />
+        
         <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
+          <Pointer />
           {spheres.map((props, i) => (
             <SphereGeo
               key={i}
               {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
+              material={materials[i % materials.length]}
               isActive={isActive}
+              isAttracting={isAttracting}
+              explosion={explosion}
             />
           ))}
         </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
+
         <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+          <Bloom luminanceThreshold={1} intensity={0.3} radius={0.4} />
         </EffectComposer>
+
+        <Environment preset="city" environmentIntensity={0.5} />
       </Canvas>
+      <div className="tech-hint" style={{ opacity: isActive ? 1 : 0 }}>
+        Hold Click to <span style={{ color: "var(--accentColor)" }}>ATTRACT</span> • Release to <span style={{ color: "#ff4444" }}>PUSH</span>
+      </div>
     </div>
   );
 };

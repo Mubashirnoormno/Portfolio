@@ -43,7 +43,10 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          MN
+          <svg width="34" height="34" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
+            <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.05)"/>
+            <path d="M7 23V9L12 16L17 9V23M17 11L23 23V9" stroke="#5eead4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 3px #5eead4)" }}/>
+          </svg>
         </a>
         <a
           href="mailto:mmubashir342@gmail.com"
@@ -59,8 +62,8 @@ const Navbar = () => {
             </a>
           </li>
           <li>
-            <a data-href="#work" href="#work">
-              <HoverLinks text="WORK" />
+            <a data-href="#gallery" href="#gallery">
+              <HoverLinks text="GALLERY" />
             </a>
           </li>
           <li>

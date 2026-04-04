@@ -1,0 +1,6 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#050810"/>
+  <!-- High-End Interlocking Monogram MN -->
+  <path d="M7 23V9L12 16L17 9V23M17 11L23 23V9" stroke="#5eead4" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 3px #5eead4);"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke="#5eead4" stroke-opacity="0.3" stroke-width="1"/>
+</svg>

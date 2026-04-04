@@ -5,34 +5,34 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "Digital Stadium Entry",
-    category: "System Architecture",
-    tools: "PCB, Gate Scanner App, Admin DB",
-    image: "/images/Solidx.png",
-  },
-  {
-    title: "Mmm Sale",
-    category: "E-Commerce",
-    tools: "PHP, JavaScript, Payments",
-    image: "/images/radix.png",
-  },
-  {
     title: "Aptech Institute",
     category: "Educational Platform",
-    tools: "PHP, HTML, CSS, Registration",
-    image: "/images/bond.png",
+    tools: "PHP, HTML, CSS, User Registration",
+    image: "/images/aptech.png",
   },
   {
-    title: "Full-Stack E-Commerce",
-    category: "Web Application",
-    tools: "React.js, Node.js, MongoDB",
-    image: "/images/sapphire.png",
+    title: "Afraz Ali Portfolio",
+    category: "Personal Brand Website",
+    tools: "Frontend Development, UI/UX, Animations",
+    image: "/images/portfolio.png",
   },
   {
-    title: "Towards Eternity",
-    category: "Voiceover Content",
-    tools: "Audio Editing, Translation",
-    image: "/images/Maxlife.png",
+    title: "Momin Cola",
+    category: "Interactive Prototyping",
+    tools: "Figma, Web Animation, Product Showcase",
+    image: "/images/momin-cola.png",
+  },
+  {
+    title: "MMM Sale",
+    category: "E-Commerce Platform",
+    tools: "PHP, JavaScript, Payments Integration",
+    image: "/images/mmm-sale.png",
+  },
+  {
+    title: "Cinar CRM Dashboard",
+    category: "Management System",
+    tools: "Admin Dashboard, Analytics, Web App",
+    image: "/images/crm.png",
   },
 ];
 
