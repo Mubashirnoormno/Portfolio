@@ -212,7 +212,7 @@ const CreativeGallery = () => {
                       cursor: "pointer",
                       display: "inline-flex" 
                     }}
-                    onClick={(e) => {
+                    onClick={() => {
                       console.log("Drive Link Clicked:", selectedItem.driveLink);
                       // Don't stop propagation here, let the browser handle the link naturally
                     }}
