@@ -31,3 +31,16 @@
     --size: 0px;
   }
 }
+
+/* Force the "Hand" (pointer) on all interactive elements */
+[data-cursor="pointer"],
+[data-cursor="icons"],
+.gallery-item,
+.drive-btn,
+.resume-button,
+.header ul a,
+.navbar-connect,
+.contact-social,
+.navbar-title {
+  cursor: pointer !important;
+}
