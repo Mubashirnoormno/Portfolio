@@ -20,8 +20,9 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/mubashirnoormno"
+              href="https://github.com/Mubashirnoormno/Portfolio"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
