@@ -5,9 +5,12 @@
   place-items: center;
   position: relative;
   opacity: 1;
-  height: auto;
+  min-height: var(--vh); /* Changed from height to min-height for flexibility */
+  padding-top: 120px; /* Clear the fixed header and email link */
+  padding-bottom: 80px;
   width: var(--cWidth);
   margin: auto;
+  box-sizing: border-box;
 }
 .about-me {
   padding: 50px 0px;
@@ -75,6 +78,7 @@
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 0 10px rgba(94, 234, 212, 0.1);
   text-decoration: none;
+  margin-top: 20px;
 }
 
 .resume-button:hover {
@@ -104,8 +108,9 @@
     width: var(--cWidth);
     justify-content: right;
     max-width: 1920px;
-    height: var(--vh);
-    padding: 0px;
+    min-height: var(--vh);
+    padding-top: 100px;
+    padding-bottom: 100px;
     opacity: 1;
   }
   .about-me {
@@ -123,3 +128,4 @@
     line-height: 1.7;
   }
 }
+
