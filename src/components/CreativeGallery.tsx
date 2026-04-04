@@ -200,26 +200,32 @@ const CreativeGallery = () => {
                     </div>
                   </div>
 
-                  <a
-                    href={selectedItem.driveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
                     className="drive-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(selectedItem.driveLink, "_blank", "noopener,noreferrer");
+                    }}
                     style={{ 
                       zIndex: 99999, 
                       position: "relative", 
                       pointerEvents: "auto", 
                       cursor: "pointer",
-                      display: "inline-flex" 
-                    }}
-                    onClick={() => {
-                      console.log("Drive Link Clicked:", selectedItem.driveLink);
-                      // Don't stop propagation here, let the browser handle the link naturally
+                      display: "inline-flex",
+                      background: "#5eead4",
+                      color: "#0a0e17",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      border: "none",
+                      fontWeight: "bold",
+                      marginTop: "20px",
+                      alignItems: "center",
+                      gap: "10px",
                     }}
                   >
                     <span>View My Full Archive in Google Drive</span>
                     <MdOpenInNew />
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
