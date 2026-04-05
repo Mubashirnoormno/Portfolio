@@ -1,4 +1,6 @@
 import "./styles/About.css";
+import { TbNotes } from "react-icons/tb";
+import HoverLinks from "./HoverLinks";
 
 const About = () => {
   return (
@@ -6,29 +8,30 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          I am a results-driven full-stack developer and creative professional with over <strong>4 years of experience</strong> building scalable web applications, digital systems, and high-end multimedia content. 
-          I independently designed a complete <strong>Digital Stadium Entry System</strong> presented to the <strong>Pakistan Cricket Board (PCB)</strong>, and produced highly evocative voiceovers for a <strong>3M+ subscriber YouTube channel.</strong> 
-          I bring ideas to life through robust engineering and compelling storytelling, taking pride in taking complex projects from concept to deployment with highly measurable outcomes.
+          I am a results-driven Systems Architect and Full-Stack Developer with over <strong>4&nbsp;years of expertise</strong> engineering high-performance digital infrastructures. My career is defined by transforming complex technical concepts into production-ready solutions, most notably my design for the <strong>Pakistan Cricket Board’s (PCB)&nbsp;stadium entry system.</strong>
+          <br /><br />
+          By combining robust software engineering with a strategic creative background—including high-scale <strong>multimedia production for 3M+ subscribers</strong>—I deliver digital experiences that are as technically sound as they are visually compelling. I take pride in leading complex projects from conceptual architecture to high-fidelity deployment with measurable, high-impact outcomes.
         </p>
         <div className="about-skills">
-          <span className="skill-tag">Digital Systems Architecture</span>
-          <span className="skill-tag">High-Performance Web Apps</span>
+          <span className="skill-tag">Systems Architecture</span>
+          <span className="skill-tag">Full-Stack Development</span>
           <span className="skill-tag">E-Commerce Infrastructure</span>
           <span className="skill-tag">Interactive UI/UX</span>
-          <span className="skill-tag">Multimedia Content Strategy</span>
-          <span className="skill-tag">Professional Voiceovers</span>
+          <span className="skill-tag">Multimedia Strategy</span>
+          <span className="skill-tag">Voiceover Production</span>
         </div>
         
-        {/* Dynamic Professional Call-to-Action */}
-        <div className="about-cta" style={{ marginTop: "40px" }}>
+        {/* Restored Original Style Button with Icon */}
+        <div className="about-cta">
           <a 
             href="/Mubashir's Resume.pdf" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="resume-button"
+            className="resume-button-original"
             data-cursor="pointer"
           >
-            Download Full Resume (PDF)
+            <HoverLinks text="RESUME" />
+            <TbNotes className="resume-icon" />
           </a>
         </div>
       </div>

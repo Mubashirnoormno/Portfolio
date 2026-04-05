@@ -107,29 +107,27 @@ body {
   width: 100%;
   position: relative;
   overflow: clip;
-  height: var(--vh);
+  height: auto;
   margin: auto;
-  margin-top: 50px;
-  margin-bottom: -100px;
+  padding: 80px 0; /* Matched to Creative Showcase */
   z-index: 1; /* Keep physics behind main interaction sections */
 }
 
-.techstack h2 {
-  font-size: clamp(40px, 10vw, 100px);
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  top: 45%;
-  left: 0;
-  transform: translateY(-50%);
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 0 15px var(--accentColor);
-  letter-spacing: clamp(5px, 2vw, 20px) !important;
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: 0;
+.techstack h2.title {
+  font-size: 70px;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.techstack h2.title > span {
+  color: var(--accentColor);
+}
+
+.section-header {
+  width: var(--cWidth);
+  margin: auto;
+  padding-top: 0; /* Handled by section padding */
 }
 
 @media screen and (min-width: 768px) {
@@ -138,11 +136,7 @@ body {
   }
 }
 
-@media screen and (max-width: 900px) {
-  .techstack h2 {
-    font-size: 50px;
-  }
-}
+
 
 .tech-hint {
   position: absolute;

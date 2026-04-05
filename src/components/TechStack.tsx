@@ -167,8 +167,10 @@ const TechStack = () => {
   };
 
   return (
-    <div className="techstack">
-      <h2>Tech Arena</h2>
+    <div className="techstack" id="experience">
+      <div className="section-header">
+        <h2 className="title">Tech <span>Arena</span></h2>
+      </div>
       <Canvas
         gl={{ 
           alpha: true, 

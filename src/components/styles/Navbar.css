@@ -34,7 +34,7 @@
   position: absolute;
   display: none;
   left: 50%;
-  top: 50%;
+  top: 35%; /* Fixed overlap by moving it up */
   transform: translate(-50%, -50%);
   font-size: 15px;
   letter-spacing: 1px;
