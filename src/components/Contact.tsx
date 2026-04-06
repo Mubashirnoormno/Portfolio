@@ -31,10 +31,20 @@ const Contact = () => {
             <a
               href="https://linkedin.com/in/mubashirnoormno"
               target="_blank"
+              rel="noopener noreferrer"
               data-cursor="disable"
               className="contact-social"
             >
               Linkedin <MdArrowOutward />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="disable"
+              className="contact-social"
+            >
+              Instagram <MdArrowOutward />
             </a>
           </div>
           <div className="contact-box">
@@ -49,7 +59,7 @@ const Contact = () => {
               </a>
             </h2>
             <h5>
-              <MdCopyright /> 2022
+              <MdCopyright /> {new Date().getFullYear()}
             </h5>
           </div>
         </div>

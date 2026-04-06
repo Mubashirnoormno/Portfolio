@@ -136,7 +136,7 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>REPUTATION MANAGEMENT</h3>
+              <h3>DIGITAL BRAND STRATEGY</h3>
               <h4>Digital Brand Growth & SEO Strategy</h4>
               <p>
                 I have successfully built, managed, and rapidly accelerated the online digital reputation and presence for numerous companies, agencies, and public brands.

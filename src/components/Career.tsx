@@ -20,10 +20,23 @@ const Career = () => {
                 <h4>Lead Systems Architect</h4>
                 <h5>Independent Consultancy / PCB</h5>
               </div>
-              <h3>NOW</h3>
+              <h3>2026</h3>
             </div>
             <p>
               Single-handedly engineered, designed, and launched a complete real-time Digital Stadium Entry & Ticket Verification System. Successfully presented the production-ready architecture directly to the Pakistan Cricket Board (PCB).
+            </p>
+          </div>
+
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>B2B Digital Brand Strategist</h4>
+                <h5>Briq AI, Metrobi & Coachello</h5>
+              </div>
+              <h3>2025</h3>
+            </div>
+            <p>
+              Managed and accelerated the online digital reputation, brand strategy, and social presence for fast-growing international tech startups and B2B SaaS companies.
             </p>
           </div>
 
@@ -56,7 +69,7 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Lead Multimedia Producer</h4>
+                <h4>Freelance Video Editor</h4>
                 <h5>Premium Freelance Services (Upwork)</h5>
               </div>
               <h3>2019</h3>

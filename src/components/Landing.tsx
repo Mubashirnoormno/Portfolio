@@ -4,7 +4,7 @@ import "./styles/Landing.css";
 const ROLES = [
   "Systems Architect",
   "Full-Stack Engineer",
-  "Multimedia Producer",
+  "UI/UX Engineer",
   "Reputation Manager",
   "Voiceover Artist",
   "Brand Strategist"
@@ -23,6 +23,7 @@ const Landing = ({ children }: PropsWithChildren) => {
     <>
       <div className="landing-section" id="landingDiv">
         <div className="landing-container">
+          {children}
           <div className="landing-intro">
             <h2>Hello! I'm</h2>
             <h1>
@@ -34,13 +35,12 @@ const Landing = ({ children }: PropsWithChildren) => {
           <div className="landing-info" style={{ minHeight: "100px" }}>
             <h3>I am a</h3>
             <h2 className="landing-info-h2" style={{ marginTop: "10px", paddingBottom: "10px" }}>
-              <div style={{ color: "var(--accentColor)", animation: "fadeInOut 2s infinite" }}>
+              <div key={roleIndex} style={{ color: "var(--accentColor)", animation: "fadeInOut 2s forwards" }}>
                 {ROLES[roleIndex]}
               </div>
             </h2>
           </div>
         </div>
-        {children}
       </div>
     </>
   );
