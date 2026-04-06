@@ -57,32 +57,39 @@ function SphereGeo({
       0
     );
 
-    // 1. Regular Mouse Push/Pull
+    // 1. Fluid Mouse Interactivity
     const direction = vec.copy(currentPos).sub(cursorVec);
     const distance = direction.length();
     
-    if (distance < 10) {
-      const forceMultiplier = isAttracting ? -300 : 180; // Harder Pull (-) vs Fast Passive Push (+)
-      const impulse = direction
-        .normalize()
-        .multiplyScalar(forceMultiplier * delta * scale * (10 / (distance + 0.5)));
-      api.current.applyImpulse(impulse, true);
+    // Magnetic pull when click is held
+    if (isAttracting) {
+      if (distance < 20) {
+        const pull = direction.normalize().multiplyScalar(-350 * delta * (15 / (distance + 1)));
+        api.current.applyImpulse(pull, true);
+      }
+    } else {
+      // Gentle passive repulse so they bounce away nicely
+      if (distance < 8) {
+        const push = direction.normalize().multiplyScalar(150 * delta * (8 / (distance + 1)));
+        api.current.applyImpulse(push, true);
+      }
     }
 
-    // 3. Fast Centering Force (Snap back into the arena)
-    const centeringForce = vec.copy(currentPos).multiplyScalar(-0.8 * delta);
-    api.current.applyImpulse(centeringForce, true);
-
-    // 2. Shockwave Explosion Logic (Extremely Fast PUSH)
+    // 2. Smooth Explosion Shockwave
     if (explosion && Date.now() - explosion.time < 150) {
       const explosionCenter = new THREE.Vector3(explosion.x, explosion.y, 0);
       const expoDir = vec.copy(currentPos).sub(explosionCenter);
       const expoDist = expoDir.length();
-      if (expoDist < 18) {
-        const boom = expoDir.normalize().multiplyScalar(1200 * scale * (1 / (expoDist + 0.5)));
+      if (expoDist < 25) {
+        // Continuous, powerful smooth force outward
+        const boom = expoDir.normalize().multiplyScalar(600 * delta * (25 / (expoDist + 1)));
         api.current.applyImpulse(boom, true);
       }
     }
+
+    // 3. Gentle Centering Force
+    const centerForce = vec.copy(currentPos).multiplyScalar(-0.5 * delta);
+    api.current.applyImpulse(centerForce, true);
   });
 
   return (

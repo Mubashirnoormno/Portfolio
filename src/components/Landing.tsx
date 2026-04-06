@@ -2,12 +2,9 @@ import { PropsWithChildren, useState, useEffect } from "react";
 import "./styles/Landing.css";
 
 const ROLES = [
-  "Systems Architect",
-  "Full-Stack Engineer",
-  "UI/UX Engineer",
-  "Reputation Manager",
-  "Voiceover Artist",
-  "Brand Strategist"
+  "Full-Stack Systems Architect",
+  "Creative Media Specialist",
+  "Digital Brand Strategist"
 ];
 
 const Landing = ({ children }: PropsWithChildren) => {
